@@ -1,26 +1,20 @@
-import java.io.*;
-import java.util.*;
 
-/**
- * Write a description of class CelebrityNames here.
- * 
- * @author Roger Jaffe
- * @version 2015-01-19
- */
 public class Tester {
-    public static double main(String args[]) throws IOException { 
-        MonteCarlo mcObj = new MonteCarlo(5,3,2);
-        double pie;
-        int sqrCount = 0, cirCount, x, y;
-        for (x = 0; x >=100; x++) {
-            x = MonteCarlo.nextRainDrop_x();
-            y = MonteCarlo.nextRainDrop_y();
-            Boolean in = MonteCarlo.insideCircle(x,y);
-            if(in == true)
+    static MonteCarlo monteCarlo = new MonteCarlo(5,3,2);
+    static int cirCount=0;
+    static int sqrCount =0;
+    public static void main(String[] args){
+
+        for(int i=0; i<10000000;i++){
+            double randx = monteCarlo.nextRainDrop_x();
+            double randy = monteCarlo.nextRainDrop_y();
+            if(monteCarlo.insideCirle(randx, randy)){
                 cirCount++;
+
+            }
+            sqrCount++;
         }
-        sqrCount++;
-        pie = cirCount * 4 / (sqrCount * 4);
-        return pie;
+        System.out.println("Pi is about , "+cirCount*Math.pow((2*monteCarlo.r), 2)/(sqrCount*Math.pow(monteCarlo.r, 2)));
     }
+
 }
